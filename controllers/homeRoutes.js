@@ -6,7 +6,6 @@ const withAuth = require("../utils/auth");
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
-      attributes: { exclude: ["password", "email"] },
       order: [["date_created", "DESC"]],
     });
     console.log(postData);
