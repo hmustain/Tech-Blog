@@ -1,10 +1,10 @@
 // creating seed.js file. looked at prev activities and documentation for this
-const sequelize = require("../config/connection");
-const { User, Post, Comment } = require("../models");
+const sequelize = require('../config/connection');
+const { User, Post, Comment } = require('../models');
 
-const userData = require("./userData.json");
-const postData = require("./postData.json");
-const commentData = require("./commentData.json");
+const userData = require('../seeds/userData');
+const postData = require('../seeds/postData');
+const commentData = require('../seeds/commentData');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
