@@ -30,7 +30,9 @@ Object.values(postData).forEach(async (post) => {
         ...comment,
     });
   });
-
+console.log(userData);
+console.log(postData);
+console.log(commentData);
   process.exit(0);
 };
 
