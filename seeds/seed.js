@@ -2,9 +2,9 @@
 const sequelize = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 
-const userData = require('./userData');
+const userData = require('./userData.js');
 const postData = require('./postData');
-const commentData = require('./commentData');
+const commentData = require('./commentData.js');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -14,19 +14,22 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-// for loop that iterates through the object postData and creates a new post uses spread operator ('...') to spread the properties of the current oject in the array in tho the create method. this makes it to where each property is passed as an individual argument
-  for (const post of postData) {
-    await Post.create({
+// had to use object.value method to convert my postData file to an array to allow the forEach method to work
+// https://masteringjs.io/tutorials/fundamentals/foreach-object
+Object.values(postData).forEach(async (post) => {
+  await Post.create({
       ...post,
-    });
-  }
+  });
+});
 
-  // for loop that iterates through the object postComment and creates a new comment uses spread operator ('...') to spread the properties of the current oject in the array in tho the create method. this makes it to where each property is passed as an individual argument
-  for (const comment of commentData) {
+
+// had to use object.value method to convert my commentData file to an array to allow the forEach method to work
+// https://masteringjs.io/tutorials/fundamentals/foreach-object
+  Object.values(commentData).forEach(async (comment) => {
     await Comment.create({
-      ...comment,
+        ...comment,
     });
-  }
+  });
 
   process.exit(0);
 };
