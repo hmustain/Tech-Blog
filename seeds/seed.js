@@ -1,4 +1,5 @@
 // creating seed.js file. looked at prev activities and documentation for this
+console.log(__dirname);
 const sequelize = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 
@@ -14,22 +15,20 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-// had to use object.value method to convert my postData file to an array to allow the forEach method to work
-// https://masteringjs.io/tutorials/fundamentals/foreach-object
-Object.values(postData).forEach(async (post) => {
+// loop through post with for of post
+for (const post of postData) {
   await Post.create({
-      ...post,
+    ...post
   });
-});
+}
 
 
-// had to use object.value method to convert my commentData file to an array to allow the forEach method to work
-// https://masteringjs.io/tutorials/fundamentals/foreach-object
-  Object.values(commentData).forEach(async (comment) => {
-    await Comment.create({
-        ...comment,
-    });
+// loop through the comments w/ a for of loop
+for (const comment of commentData){
+  await Comment.create({
+    ...comment
   });
+}
 console.log(userData);
 console.log(postData);
 console.log(commentData);
