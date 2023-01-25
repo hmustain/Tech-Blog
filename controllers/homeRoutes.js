@@ -18,6 +18,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// go back and add withAuth here
 router.get('/post/:id', async (req, res) => {
     try {
       const postData = await Post.findByPk(req.params.id, {
@@ -38,6 +39,29 @@ router.get('/post/:id', async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
+  });
+
+  // go back and add withAuth here
+  router.get('/post/edit/:id', async (req, res) => {
+
+    try {
+  
+      const postData = await Post.findByPk(req.params.id, {
+        where: {
+        user_id: req.session.user_id,
+        },
+      })
+  
+      const post = postData.get({ plain: true });
+  
+      console.log(post);
+  
+      res.render('editPost', { post } )
+  
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  
   });
 
   // Use withAuth middleware to prevent access to route
@@ -70,5 +94,15 @@ router.get('/dashboard', async (req, res) => {
   
     res.render('login');
   });
+
+  router.get('/signup', async (req, res) => {
+    try {
+      // Pass serialized data and session flag into template
+      res.render('signup');
+    } catch (err) {
+      res.status(404).json(err);
+    }
+  });
+
 
 module.exports = router;

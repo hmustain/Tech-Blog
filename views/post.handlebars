@@ -1,5 +1,9 @@
 <div class="text-center">
-  <h2>{{title}}</h2>
+  <h2>
+    <a href="/post/edit/{{post.id}}">{{title}}</a>
+  </h2>
   <p>{{content}}</p>
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
+  <button type="submit">Update</button>
+  <button type="button">Delete</button>
 </div>
