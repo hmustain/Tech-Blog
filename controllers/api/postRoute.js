@@ -1,9 +1,16 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
+    console.log(req.session)
     try {
+      if (!req.body.hasOwnProperty('title')) {
+        return res.status(400).json({ message: "Title is required" });
+      }
+      if (!req.session.hasOwnProperty('user_id') || typeof req.session.user_id !== 'number') {
+        return res.status(400).json({ message: "user_id is required" });
+      }
       const newPost = await Post.create({
         ...req.body,
         user_id: req.session.user_id,
@@ -15,7 +22,9 @@ router.post('/', withAuth, async (req, res) => {
     }
   });
 
-  router.delete('/:id', withAuth, async (req, res) => {
+
+
+  router.delete('/:id', async (req, res) => {
     try {
       const postData = await Post.destroy({
         where: {
