@@ -16,6 +16,26 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const commentData = await Comment.update({ 
+      comment: req.body.comment,
+    },
+    {
+      where: {
+        id: req.params.id,
+        post_id: req.body.postId,
+        user_id: req.session.user_id
+      }
+    })
+
+    res.status(200).json(commentData);
+  } catch (err) {
+    console.log(commentData);
+    res.status(400).json(err);
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const commentData = await Comment.destroy({
