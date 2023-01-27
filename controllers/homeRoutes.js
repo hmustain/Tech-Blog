@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 // go back and add withAuth here
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
     try {
       const postData = await Post.findByPk(req.params.id, {
         include: [
@@ -42,7 +42,7 @@ router.get('/post/:id', async (req, res) => {
   });
 
   // go back and add withAuth here
-  router.get('/post/edit/:id', async (req, res) => {
+  router.get('/post/edit/:id', withAuth, async (req, res) => {
 
     try {
   
@@ -66,36 +66,40 @@ router.get('/post/:id', async (req, res) => {
 
   
 
-  // Use withAuth middleware to prevent access to route
-router.get('/dashboard', async (req, res) => {
-    try {
-      // Find the logged in user based on the session ID
-      req.session.user_id=1  
-      const userData = await User.findByPk(req.session.user_id, {
-        attributes: { exclude: ['password'] },
-        include: [{ model: Post }],
-      });
-  
-      const user = userData.get({ plain: true });
-  
-      res.render('dashboard', {
-        ...user,
-        logged_in: true
-      });
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
-  router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect the request to another route
-    if (req.session.logged_in) {
-      res.redirect('/dashboard');
-      return;
-    }
-  
-    res.render('login');
-  });
+router.get('/dashboard', async (req, res) => {
+  if(!req.session.user_id) {
+    res.redirect('/login');
+    return;
+  }
+  try {
+    // Find the logged in user based on the session ID
+    const userData = await User.findByPk(req.session.user_id, {
+      attributes: { exclude: ['password'] },
+      include: [{ model: Post }],
+    });
+
+    const user = userData.get({ plain: true });
+
+    res.render('dashboard', {
+      ...user,
+      logged_in: true
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Use withAuth middleware to redirect authenticated users to the dashboard
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/dashboard');
+    return;
+  }
+
+  res.render('login');
+});
+
 
   router.get('/signup', async (req, res) => {
     try {

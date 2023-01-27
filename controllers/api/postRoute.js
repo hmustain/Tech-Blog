@@ -3,13 +3,15 @@ const { Post } = require("../../models");
 // const withAuth = require('../../utils/auth');
 
 router.get("/", async (req, res) => {
-  console.log(req.session);
   try {
-    res.status(200).json(newPost);
+      const allPosts = await Post.find();
+      console.log(allPosts)
+      res.status(200).json(allPosts);
   } catch (err) {
-    res.status(400).json(err);
+      res.status(400).json(err);
   }
 });
+
 
 router.post("/", async (req, res) => {
   console.log(req.session);
