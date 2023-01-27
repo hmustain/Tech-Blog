@@ -46,7 +46,7 @@ const newPost = async (event) => {
 document.querySelector('#create').addEventListener('click', newPost);
 
 
-const updateButton = document.querySelector('#update');
+const updateButton = document.querySelectorAll('.update-button');
 
 updateButton.addEventListener('click', async (event) => {
     event.preventDefault();
