@@ -2,14 +2,25 @@ const router = require("express").Router();
 const { Post } = require("../../models");
 // const withAuth = require('../../utils/auth');
 
+router.get("/", async (req, res) => {
+  console.log(req.session);
+  try {
+    res.status(200).json(newPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 router.post("/", async (req, res) => {
   console.log(req.session);
+  if (!req.session.user_id) {
+    return res.status(400).json({ message: "You must be logged in to post!" });
+  }
   try {
     const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });
-
     res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
