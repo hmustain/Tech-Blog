@@ -1,0 +1,50 @@
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Add a Comment:</h3>
+
+    <form class="form new-comment-form" action="/comments" method="post">
+      <div class="form-group">
+        <label for="comment-text">Comment:</label>
+        <textarea class="form-input" id="comment-text" name="comment"></textarea>
+      </div>
+      <input type="hidden" name="postId" value="{{postId}}" /> 
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+      </div>
+    </form>
+  </div>
+
+  {{#if comments.length}}
+  <div class="col-md-6 comment-list">
+    <h3>Current Comments:</h3>
+
+    {{#each comments as |comment|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <p>{{comment.comment}}</p>
+        <p>Commented by {{comment.user.username}}</p>
+      </div>
+      {{#if (eq comment.user.id req.session.user_id)}}
+      <div class="col-md-4">
+        <a href="/comments/{{comment.id}}/edit" class="btn btn-sm btn-primary">Edit</a>
+        <form class="delete-form" action="/comments/{{comment.id}}" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+<script>
+  document.querySelector("#create-comment-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const commentText = document.querySelector("#comment-text").value;
+    const postId = document.querySelector("input[name='postId']").value;
+
+    // send a post request to the server to create a new comment
+    // with the comment text and postId
+  });
+</script>
