@@ -1,14 +1,20 @@
-<div>
-    <div>
-        <h2>Edit Post</h2>
-    </div>
-    <form>
-        <input type="text" id="" value="{{post.id}}"/>
-        <label for="">Title</label>
-        <input type="text" value="{{post.title}}"/>
-        <label for="">Content</label>
-        <textarea>{{post.content}}</textarea>
-        <button type="submit">Update</button>
-        <button type="button">Delete</button>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Update Post:</h3>
+
+    <form class="form new-project-form">
+      <div class="form-group">
+        <label for="project-name">Post name:</label>
+        <input class="form-input" type="text" id="project-name" name="project-name" />
+      </div>
+      <div class="form-group">
+        <label for="project-desc">Description:</label>
+        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" id="update">Update</button>
+      </div>
     </form>
-</div>
+  </div>
+<script src="./js/newPost.js"></script>

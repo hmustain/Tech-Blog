@@ -42,5 +42,29 @@ const newPost = async (event) => {
         });
     }
 
+    
+document.querySelector('#create').addEventListener('click', newPost);
 
-    document.querySelector('#create').addEventListener('click', newPost);
+
+const updateButton = document.querySelector('#update');
+
+updateButton.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const postId = event.target.dataset.id;
+    const updatedTitle = document.querySelector('#project-name').value;
+    const updatedContent = document.querySelector('#project-desc').value;
+
+    // Send a PUT request to the API endpoint
+    const response = await fetch(`/api/posts/${postId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: updatedTitle, content: updatedContent }),
+    });
+
+    if (response.ok) {
+        // If successful, reload the page
+        location.reload();
+    } else {
+        alert(response.statusText);
+    }
+});
