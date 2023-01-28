@@ -64,6 +64,23 @@ router.get('/post/:id', withAuth, async (req, res) => {
   
   });
 
+// update post
+  router.put('/api/posts/:id', async (req, res) => {
+    try {
+      const post = await Post.findByPk(req.params.id);
+      if (!post) {
+        return res.status(404).json({ message: 'Post not found' });
+      }
+      const updatedPost = await post.update({
+        title: req.body.title,
+        content: req.body.content
+      });
+      res.json(updatedPost);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  });
+  
   
 
 

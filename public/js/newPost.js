@@ -15,11 +15,35 @@ const newPost = async (event) => {
     
         if (response.ok) {
           // If successful, redirect the browser to the profile page
-          document.location.replace('/');
+          document.location.replace('/dashboard');
         } else {
           alert(response.statusText);
         }
       }
     };
 
-    document.querySelector('#create').addEventListener('click', newPost);
+    const deleteButtons = document.querySelectorAll('.delete-button');
+
+    for (const button of deleteButtons) {
+        button.addEventListener('click', async (event) => {
+            const postId = event.target.dataset.id;
+    
+            // Send a DELETE request to the API endpoint
+            const response = await fetch(`/api/posts/${postId}`, {
+                method: 'DELETE',
+            });
+    
+            if (response.ok) {
+                // If successful, reload the page
+                location.reload();
+            } else {
+                alert(response.statusText);
+            }
+        });
+    }
+
+    
+document.querySelector('#create').addEventListener('click', newPost);
+
+
+
