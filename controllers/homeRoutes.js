@@ -76,7 +76,6 @@ router.get('/post/:id', withAuth, async (req, res) => {
         content: req.body.content
       });
       res.json(updatedPost);
-      res.redirect('/dashboard');
     } catch (err) {
       res.status(400).json(err);
     }
