@@ -3,7 +3,7 @@
         
 
 ## Description
-This is our first full-stack web application. The purpose of this application is for the user to take all of the skills they've learned thus far, front-end and back-end technologies, and put the put them together and build a full stack web application. This one being a blog for tech people to be able to login and see post, post new co posts and update posst and delete post. Also be able to post comments on other post and update/delete comments.
+This is our first full-stack web application. The purpose of this application is for the user to take all of the skills they've learned thus far, front-end and back-end technologies, and put the put them together and build a full stack web application. This one being a blog for tech people to be able to login and see post, post new posts and update post and delete post. Also be able to post comments on other post and update/delete comments.
 
 ## Table of Contents
 
@@ -16,10 +16,22 @@ This is our first full-stack web application. The purpose of this application is
 - [Questions](#questions)
 
 ## Installation
-come back to
+For this application to work add the following dependencies to your package.json
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.0.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
+  },
+once added, run npm i from the command line to install all.
+
 
 ## Usage
-To use this application, make sure your database has been sourced, your files seeded, and yoru server started.
+To use this application, make sure your database has been sourced, your files seeded, and your server started.
 
 ## Credits
 Instructor, Tutor, class mates, Ta's, and AskBCS
@@ -31,7 +43,7 @@ No contributions allowed <br>
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
         
-Copyright 2022 Hunter Mustain
+Copyright 2023 Hunter Mustain
 
         Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
         
