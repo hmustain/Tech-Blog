@@ -17,7 +17,7 @@ const newComment = async (event) => {
     if (comment && postId) {
         // Send a POST request to the API endpoint
         try {
-            const response = await fetch('/comments', {
+            const response = await fetch('/api/comments', {
                 method: 'POST',
                 body: JSON.stringify({ comment, postId, user_id: user.id }),
                 headers: { 'Content-Type': 'application/json' },
