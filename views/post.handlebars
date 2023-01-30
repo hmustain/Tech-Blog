@@ -6,7 +6,7 @@
   <p>Created by {{user.name}} on {{format_date date_created}}</p>
   <!-- Loop over each object in the projects array -->
 {{#each comments as |comment| }}
-<div class="row mb-4 project">
+<div class="text-center">
   <div class="col-md-5">
     <h2>
       <a href="/post/{{comment.id}}">{{comment.title}}</a>
@@ -27,10 +27,11 @@
         <label for="comment-text">Comment:</label>
         <textarea class="form-input" id="comment-text" name="comment"></textarea>
       </div>
-      <input type="hidden" name="postId" value="{{postId}}" /> 
+      <input type="hidden" name="postId" value="{{post.id}}" /> 
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Post Comment</button>
       </div>
     </form>
   </div>
 </div>
+<script src="/js/newComment.js"></script>
