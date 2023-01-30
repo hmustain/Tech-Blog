@@ -27,6 +27,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
             model: User,
             attributes: ['name'],
           },
+          { model: Comment, include: [{ model: User }] }
         ],
       });
 
@@ -80,6 +81,23 @@ router.get('/post/:id', withAuth, async (req, res) => {
       res.status(400).json(err);
     }
   });
+
+  // route for comment
+  router.post('/comments', withAuth, async (req, res) => {
+    try {
+        const { comment, postId, user_id } = req.body;
+        const newComment = await Comment.create({ comment, post_id: postId, user_id });
+        if(newComment) {
+            res.status(201).redirect(`/post/${postId}`);
+        } else {
+            res.status(500).json({error: 'Could not create comment'});
+        }
+    } catch (err) {
+        res.status(500).json({error: 'An error occurred while posting the comment. Please try again later.'});
+    }
+});
+
+  
   
   
 

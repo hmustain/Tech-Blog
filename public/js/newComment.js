@@ -1,4 +1,5 @@
 const newComment = async (event) => {
+    console.log('newComment function called');
     event.preventDefault();
   
     // Check if user is logged in
