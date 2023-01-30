@@ -2,13 +2,13 @@ const newComment = async (event) => {
     console.log('newComment function called');
     event.preventDefault();
   
-    // Check if user is logged in
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
-        // If not, redirect to login page
-        document.location.replace('/login');
-        return;
-    }
+    // // Check if user is logged in
+    // const user = JSON.parse(localStorage.getItem('user'));
+    // if (!user) {
+    //     // If not, redirect to login page
+    //     document.location.replace('/login');
+    //     return;
+    // }
   
     // Collect values from the comment form
     const comment = document.querySelector('#comment-text').value.trim();
@@ -19,7 +19,7 @@ const newComment = async (event) => {
         try {
             const response = await fetch('/api/comments', {
                 method: 'POST',
-                body: JSON.stringify({ comment, postId, user_id: user.id }),
+                body: JSON.stringify({ comment, postId }),
                 headers: { 'Content-Type': 'application/json' },
             });
 
