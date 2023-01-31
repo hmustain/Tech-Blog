@@ -33,6 +33,12 @@ once added, run npm i from the command line to install all.
 ## Usage
 To use this application, make sure your database has been sourced, your files seeded, and your server started.
 
+### Live Site
+https://tech-blog-hm.herokuapp.com/
+
+### Image of deployed site
+
+
 ## Credits
 Instructor, Tutor, class mates, Ta's, and AskBCS
 
