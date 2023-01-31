@@ -37,7 +37,7 @@ To use this application, make sure your database has been sourced, your files se
 https://tech-blog-hm.herokuapp.com/
 
 ### Image of deployed site
-
+![image](https://user-images.githubusercontent.com/109978698/215676829-36ffb855-4ab2-44b5-972c-e8873f05a008.png)
 
 ## Credits
 Instructor, Tutor, class mates, Ta's, and AskBCS
